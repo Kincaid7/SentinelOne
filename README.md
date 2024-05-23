@@ -6,12 +6,17 @@ I was one of 5000 selected to compete in the first CyberSentinel Capture the Fla
 # Preparation
 The day prior to the competition, I checked the resources page on the competition Slack Fourm, where competitors were sharing different tools and techniques they would use in CTF competitions prior. One participant was giving away a course he developed on Udemy called CTF 101, and I hit the jackpot. I enrolled in his course and crammed all its content, resulting in the creation of my Kali Linux attack virtual machine furnished with various hacking tools and a basic understanding as to how and when to use them in various challenge categories.
 
+To aid me throughout the competition I would utilize Google and AI models to assist in solving the various challenges. These resources did not solve the challenges for me but rather recommended various tools and approaches that I could experiment with.
+
 # Printer (Web Security)
 This challenge presented me with a login page. I used a command-line tool called DIRB included in Kali Linux to scan the webpage for existing and hidden web objects. This command scanned the specified webpage and listed various directories and files it found, including /robots.txt and /notes.txt. After investigating the files, I found the admin password and was able to login to the printer and obtain the flag. 
 
-NOTE: Unfortunately, this challenge was broken due to brute force attempts by other competitors. Despite the fact that I was using the proper credentials, the server was rejecting my login when it shouldn't have been. The developers announced in Slack that the challenge was having errors and recommended continuously trying the correct credentials until the application accepted them. I did this for several minutes, and finally, one login attempt was processed as intended, and I obtained the flag. This led to me spending hours going down rabbit holes when I had already solved the problem in the first 30 minutes, and it cost me a lot of time I could have put towards other challenges.
+NOTE: Unfortunately, this challenge was broken due to brute force attempts by other competitors. Despite the fact that I was using the proper credentials, the server was rejecting my login when it shouldn't have been. The developers announced in Slack that the challenge was misbehaving and recommended continuously trying the correct credentials until the server accepted them. I did this for several minutes, and finally, one login attempt was processed as intended, and I obtained the flag. This error cost me hours of going down rabbit holes when I had already solved the problem in the first 30 minutes, thus reducing the total time I had for other challenges.
 
 # Header Hinterlands (Network and Recon)
+In this challenge I was given a .tar image to set up a docker for. I used Google to learn the specific commands necessary to do so. I then opened the webpage in my browser and looked for some clues. I didn't find anything suspicious and continued to check the source code. Still nothing interesting.
+I asked ChatGPT for leads and it recommended trying the curl command to fetch the HTTP headers of the webpage. I did so and noticed the X-Syndicate-Command contained a hash ending with the characteristic "=" of Base64 encryption. I passed this hash through Cyberchef and was able to decrypt it and find the flag.
+![image](https://github.com/Kincaid7/SentinelOne/assets/41767740/065a4cfd-7657-41ff-97f7-0e3108355061)
 
 # Have you bean here before? (OSINT)
 ![image](https://github.com/Kincaid7/SentinelOne/assets/41767740/2a693a39-75f3-434a-9304-083ba38ba780)
@@ -24,7 +29,15 @@ I then used [WiGLE](https://wigle.net/map?maplat=38.90274358060917&maplon=-77.02
 
 
 # Planes (OSINT)
-<a href="https://example.com" target="_blank">Visit Example</a>
+For this challenge we were asked to find the ICAO Airport Code of a specific runway. We were given the following images.
+![plane](https://github.com/Kincaid7/SentinelOne/assets/41767740/4b7f6b71-0f9c-4d97-b7a9-87df2c451f6a)
+![imagery](https://github.com/Kincaid7/SentinelOne/assets/41767740/4933381f-b9a6-4583-978d-6c0d7b1de836)
+I began by checking the metadata for additional details and there was little information to be gained. I then uploaded the images to Google Lens and looked at similar photos. The image of the planes led me to an Yahoo [article](https://www.yahoo.com/news/russian-tu-22m3-strategic-bomber-151500879.html) specifiying Russian aircraft and mentioning Solsty airbase in Russia. Unfortunately this airbase did not match that of the aerial photograph provided. This article however led me to narrow my search of airbases to Russia and Ukraine. I then tried to find matches of the airport shown in the aerial photograph but was not having any luck. Utilizing my background with Photoshop, I applied various adjustments and enhancements to the aerial shot and passed my edited photo through Google Lens which seemed to improve the relevancy of the suggested imaged.
+![image](https://github.com/Kincaid7/SentinelOne/assets/41767740/69606ab2-5cc9-460c-90c3-4297a6788f2b)
+After combing through the various suggestions I found a picture attached to an that seemed to be an exact match.
+![image](https://github.com/Kincaid7/SentinelOne/assets/41767740/5c624fb7-2778-4497-8955-85e99ab67c5c)
+I found the ICAO code for the Starokonstantinov airbase mentioned in the post on Wikipedia (UKLS), and successfully passed it as the flag for the challenge.
+
 
 
 
